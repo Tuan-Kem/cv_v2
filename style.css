@@ -1,0 +1,119 @@
+:root {
+  --accent: #f8efc2;
+  --ink: #111;
+  --page-bg: #e6e6e6;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+@page { size: A4; margin: 0; }
+
+body {
+  background: var(--page-bg);
+  font-family: "Times New Roman", Times, "Liberation Serif", serif;
+  color: var(--ink);
+  font-size: 10.5pt;
+  line-height: 1.35;
+  padding: 20px 0;
+}
+
+/* ===== Trang A4 ===== */
+.page {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  margin: 0 auto;
+  background: #fff;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 78mm 1fr;
+  grid-template-rows: 100%;          /* hàng luôn vừa chiều cao trang, không bị kéo dài */
+  gap: 6mm;
+  padding: 5mm 8mm 7mm 8mm;          /* trên 5mm (đẩy khung trái lên), dưới 7mm */
+  box-shadow: 0 2px 12px rgba(0,0,0,.2);
+}
+.page::before, .page::after {
+  content: "";
+  position: absolute;
+  background: var(--accent);
+  border-radius: 50%;
+  z-index: 0;
+}
+.page::before { width: 60mm; height: 30mm; top: -18mm; right: -12mm; }
+.page::after  { width: 40mm; height: 40mm; bottom: -22mm; right: -14mm; }
+
+/* ===== Nhãn tiêu đề ===== */
+.pill {
+  display: block;
+  background: var(--accent);
+  font-weight: 700;
+  font-size: 11pt;
+  padding: 1.6mm 4mm;
+  border-radius: 6mm;
+  width: 100%;
+  margin: 4.5mm 0 2.5mm;
+}
+
+/* ===== Cột trái ===== */
+.sidebar {
+  position: relative;
+  z-index: 1;
+  border: 0.5mm solid #000;
+  border-radius: 9mm;
+  padding: 7mm 4mm 5mm;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  min-height: 0;
+}
+.avatar {
+  flex: 0 0 auto;
+  width: 40mm;
+  height: 40mm;
+  margin: 0 auto 6mm;
+  border: 0.3mm solid #000;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #f3f3f3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8pt;
+  color: #888;
+  text-align: center;
+}
+.avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sidebar .avatar + .pill { margin-top: 0; }
+
+.side-text { list-style: none; padding-left: 4mm; font-size: 12pt; word-break: break-word; }
+.side-text p { margin-bottom: 2.2mm; }
+
+/*  Cột phải  */
+.main {
+
+  position: relative;
+  z-index: 1;
+  padding-top: 2mm;
+  min-height: 0;
+}
+.main h1 { text-align: center; font-size: 30pt; line-height: 1.1; }
+.main .role { text-align: center; font-size: 16pt; margin-bottom: 5mm; }
+.main .pill { display: inline-block; width: 62mm; font-size: 12.5pt; padding: 2mm 5mm; margin: 0 0 3.5mm; }
+.main p { text-align: justify; font-size: 13pt; line-height: 1.35; }
+.objective { margin-bottom: 5mm; }
+
+.project { margin-bottom: 4.5mm; }
+.project h3 { font-size: 12pt; font-weight: 700; margin-bottom: 2mm; }
+.project .body { padding-left: 6mm; }
+.project .body p { margin-bottom: 2mm; }
+
+/* ===== In ấn ===== */
+@media print {
+  body { background: none; padding: 0; }
+  .page { margin: 0; box-shadow: none; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+.contact-item {
+  display: flex;
+  align-items: center; 
+  gap: 8px;            
+}
